@@ -1,0 +1,92 @@
+
+
+const short sizeMatrix = 16; 
+
+
+int fruits[2][2] = {{2,2},  
+                    {2,2}};
+
+
+
+void generateFood() {
+ 
+   int c =checksnake();
+   if ((c==1)&&(fruits[0][0]!=0)&&(food.row == -1 || food.col == -1)){
+    do {
+      food.col = random(8);
+      food.row = random(8);
+    } while (gameboard[food.row][food.col] > 0);
+    fruits[0][0]--;
+  }
+   if ((c==2)&&(fruits[0][0]!=0)&&(food.row == -1 || food.col == -1)){
+    do {
+      food.col = random(8);
+      food.row =8 + random(8);
+    } while (gameboard[food.row][food.col] > 0);
+    fruits[1][0]--;
+  }
+   if ((c==3)&&(fruits[0][0]!=0)&&(food.row == -1 || food.col == -1)){
+    do {
+      food.col = 8 + random(8);
+      food.row = random(8);
+    } while (gameboard[food.row][food.col] > 0);
+    fruits[0][1]--;
+  }
+   if ( (c==4)&&(fruits[0][0]!=0)&&(food.row == -1 || food.col == -1)){
+    do {
+      food.col = 8 + random(8);
+      food.row = 8 + random(8);
+    } while (gameboard[food.row][food.col] > 0);
+    fruits[1][1]--;
+  }
+}
+
+
+
+int checksnake(){
+  if ((snake.row < 8)&&(snake.col < 8))
+  return 1;
+  if ((snake.row > 7)&&(snake.col < 8))
+   return 2;
+  if ((snake.row < 8)&&(snake.col >7))
+   return 3;
+  if ((snake.row > 7)&&(snake.col > 7))
+   return 4;
+}
+
+
+  
+  int a = checksnake();
+
+  if (a=1)
+  for (int row = 0; row < 8; row++) 
+    for (int col = 0; col < 8; col++) 
+      matrix.setLed(0, row, col, gameboard[row][col] == 0 ? 0 : 1);
+
+  if (a=2)
+   for (int row = 8; row < 16; row++) 
+     for (int col = 0; col < 8; col++) 
+       matrix.setLed(0, row, col, gameboard[row][col] == 0 ? 0 : 1);
+
+  if (a=3)
+   for (int row = 0; row < 8; row++) 
+     for (int col = 8; col < 16; col++) 
+       matrix.setLed(0, row, col, gameboard[row][col] == 0 ? 0 : 1);
+ 
+  if (a=4)
+   for (int row = 8; row < 16; row++) 
+     for (int col = 8; col < 16; col++) 
+       matrix.setLed(0, row, col, gameboard[row][col] == 0 ? 0 : 1);
+}
+
+
+
+void fixEdge() {
+  snake.col < 0 ? snake.col += 16 : 0;
+  snake.col > 15 ? snake.col -= 16 : 0;
+  snake.row < 0 ? snake.row += 16 : 0;
+  snake.row > 15 ? snake.row -= 16 : 0;
+}
+
+
+//Snake bot from 2 game modes
