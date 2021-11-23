@@ -3,6 +3,7 @@
 
 int gameMode = 0;
 
+
 class SnakeBot {
 private:
   class Point { 
